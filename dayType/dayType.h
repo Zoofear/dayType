@@ -14,7 +14,7 @@ public:
 
 	dayType()
 	{
-		setDay(1);
+		setDay(0);
 	}
 
 	dayType(int x)
@@ -22,14 +22,16 @@ public:
 		setDay(x);
 	}
 
-	//Functions
+	//Functions  
 
-	//This function takes the user inputted integer from 1 - 7
+	//This function takes the user inputted integer from 0 - 6
 	void setDay(int x)
 	{
-		if (x < 1 || x > 7)	//This makes sure that you set it to a integer in the range that the daysOfWeek array can use
+		if(x < 0 || x > 6)	//This makes sure that you set it to a integer in the range that the daysOfWeek array can use
 		{
-			cout << "You need to use an integer between 1 and 7" << endl;	//Output error message
+			cout << "You need to use an integer between 0 and 6, defaulting to sudnay" << endl;	//Output error message
+
+			currentDay = 0;
 		}
 		else
 		{
@@ -37,10 +39,11 @@ public:
 		}
 	}
 
+
 	//This function uses the array and index variable to output the current day of the week
 	void printDay()
 	{
-		cout << daysOfWeek[currentDay];
+			cout << daysOfWeek[currentDay] << endl;
 	}
 
 	//This function returns the current day of the week using the array and index variable
@@ -52,37 +55,42 @@ public:
 	//This function iterates the day forwrd by 1
 	string returnNextDay()
 	{
-		if (currentDay = 7)	//This makes it that the number loops back around
+		int counter = currentDay;	// used a local variable to make sure i dont change what day it currently is
+		
+		if (counter == 6)	//This makes it that the number loops back around
 		{
-			currentDay = 1;	//This loops it
+			counter = 0;	//This loops it
 		}
 		else
 		{
-			currentDay = currentDay + 1;	//This addes it by one to iterate it forward
+			counter = counter + 1;	//This addes it by one to iterate it forward
 		}
 
-		return daysOfWeek[currentDay];	//This returns the new day
+		return daysOfWeek[counter];	//This returns the new day
 	}
 	
 	//This function iterates the day backwards by 1
 		string returnPrevDay()
 	{
-		if (currentDay = 1)	//This makes it that the nnumber loops back around
+		int counter = currentDay;	// used a local variable to make sure i dont change what day it currently is
+			
+		if (counter == 0)	//This makes it that the nnumber loops back around
 		{
-			currentDay = 7;	//This loops it
+			counter = 6;
 		}
 		else
 		{
-			currentDay = currentDay - 1;	//This subtracts it by one to iterate it backwards 
+			counter = counter - 1;	//This subtracts it by one to iterate it backwards 
 		}
-
-		return daysOfWeek[currentDay];	//This returns the new day
+		return daysOfWeek[counter];	//This returns the new day
 	}
 
 	//Takes a user inputted nonnegative integer and uses it to find what day of the week it would be if you added it to the current day of the week
 	string calcDay(int x)
 	{
-		if (x <= 0)	//This makes sure the inputted integer is greater than 0
+		int counter = currentDay;	// used a local variable to make sure i dont change what day it currently isint counter
+		
+		if (x < 1)	//This makes sure the inputted integer is greater than 0
 		{
 			cout << "You cannot use a negative integer" << endl;	//This output lets the user know what they did wrong
 		}
@@ -90,17 +98,17 @@ public:
 		{
 			for (int A = 0; A < x; A++)	//Loop for iterating how many days forward 
 			{
-				if (currentDay = 7)		//This makes it that the nnumber loops back around
+				if (counter == 6)	//This makes it that the number loops back around
 				{
-					currentDay = 1;		//This loops it
+					counter = 0;	//This loops it
 				}
 				else
 				{
-					currentDay = currentDay + 1;	//This addes it by one to iterate it forward
+					counter = counter + 1;	//This addes it by one to iterate it forward
 				}
 			}
 
-			return daysOfWeek[currentDay];	//Returns the day of the week
+			return daysOfWeek[counter];	//Returns the day of the week
 		}
 	}
 
@@ -108,5 +116,6 @@ private:
 
 	int currentDay;
 
-	string daysOfWeek[7];
+	string daysOfWeek[7] = { "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday" };
+
 };
